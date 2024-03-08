@@ -4,6 +4,14 @@
     <h1 class='form-header-text'>
       ログイン画面
     </h1>
+<div class='container'>
+  <div class='row justify-content-center'>
+    <div class='col-md-6'>
+      <div class='card'>
+        <div class='card-header'>
+      <%= render "devise/shared/links"%>
+    </div>
+
   </div>
   <div class='login-flash-message'>
     <%= flash[:notice] %>
@@ -28,11 +36,3 @@
   </div>
 </div>
 <% end %>
-
-<div class='container'>
-  <div class='row justify-content-center'>
-    <div class='col-md-6'>
-      <div class='card'>
-        <div class='card-header'>
-      <%= render "devise/shared/links"%>
-    </div>
