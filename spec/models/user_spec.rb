@@ -31,6 +31,42 @@ RSpec.describe User, type: :model do
         @user.first_name_kana = 'タロウ'
         expect(@user).to be_valid
       end
+
+      context '新規登録がうまくできない場合' do
+        it 'ニックネームが空だと登録できない' do
+          @user.nickname = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Nickname can't be blank")
+        end
+        it 'emailが空では登録できない' do
+          @user.email = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Email can't be blank")
+        end
+        it 'emailに@が含まれていない場合登録できない' do
+          @user.email = 'hugagmail.com'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Email is invalid')
+        end
+        it 'メールアドレスがすでに登録しているユーザーと重複していると保存できない' do
+          @user.save
+          another_user = FactoryBot.build(:user)
+          another_user.email = @user.email
+          another_user.valid?
+          expect(another_user.errors.full_messages).to include('Email has already been taken')
+        end
+        it 'パスワードが空では登録できない' do
+          @user.password = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password can't be blank")
+        end
+        it 'パスワード（確認含む）が5文字以下だと保存できない' do
+          @user.password = 'ab123'
+          @user.password_confirmation = 'ab123'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+        end
+      end
     end
   end
 end
