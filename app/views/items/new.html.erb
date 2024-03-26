@@ -1,0 +1,28 @@
+<% if @item.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @item.errors.full_messages.uniq.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @item do |f| %>
+  <div class="field">
+    <%= f.label :name, 'アイテム名' %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description, '説明' %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :image, '画像URL' %>
+    <%= f.text_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit '追加' %>
+  </div>
+<% end %>
+<%= link_to 'ホーム画面に戻る', root_path, class: 'btn btn-secondary' %>
