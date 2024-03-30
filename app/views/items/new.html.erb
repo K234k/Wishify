@@ -14,8 +14,15 @@
    <p>
    クリックで画像をアップロード
    </p>
-
-
+   <%=  f.file_field? :image, id:"item-image" %>
+   </div>
+   </div>
+   <%# アイテム画像 %>
+   <%# アイテム名%>
+   <div class="new-itmes">
+   <div class="weight-bold-text">
+   アイテム名
+   <span class="indis>
 
 <% if @item.errors.any? %>
   <div id="error_explanation">
