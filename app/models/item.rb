@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
+ belongs_to :category, class_name: 'Category', foreign_key: 'category_id'
+
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true
-  validates :category, presence: true, inclusion: { in: ['メンズ', 'レディース', 'ベビー・キッズ', 'インテリア・住まい・小物', '本・音楽・ゲーム', 'おもちゃ・ホビー・グッズ', '家電・スマホ・カメラ', 'スポーツ・レジャー', 'ハンドメイド', 'その他'] }
+  validates :category_id, presence: true, inclusion: { in: Category.pluck(:id) }
 end
