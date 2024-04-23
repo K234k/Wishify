@@ -14,13 +14,13 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: 'アイテムが追加されました。'
     else
-      render :new
-    end
+    render :new
   end
+end
 
   private
 
   def item_params
     params.require(:item).permit(:name, :description, :image, :category_id)
   end
- end
+end
